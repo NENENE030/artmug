@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>네쿠 | 신청 안내 및 문의 양식</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #332b20;
+      --muted: #817665;
+      --line: #efe5c8;
+      --field: #fff;
+      --accent: #FFECB9;
+      --accent-dark: #765a10;
+      --accent-soft: #FFF7E6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      padding: 34px 20px 64px;
+      color: var(--ink);
+      background-color: #fff;
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      font-size: 14px;
+    }
+
+    .page {
+      width: min(100%, 900px);
+      margin: 0 auto;
+    }
+
+    .page-header {
+      margin-bottom: 44px;
+      background: #fff;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(27px, 5vw, 34px);
+      font-weight: 800;
+      letter-spacing: -0.06em;
+    }
+
+    .title-mark {
+      width: 42px;
+      height: 4px;
+      margin: 15px auto 13px;
+      border-radius: 99px;
+      background: var(--accent);
+    }
+
+    .page-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .form-card {
+      padding: 32px 30px 28px;
+      border: 1px solid #eee5d2;
+      border-radius: 28px;
+      background: #fff;
+      box-shadow: 0 12px 36px rgba(68, 39, 54, 0.035);
+    }
+
+    .section + .section {
+      margin-top: 27px;
+      padding-top: 25px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin: 0 0 22px;
+      font-size: 16px;
+      font-weight: 750;
+      letter-spacing: -0.04em;
+    }
+
+    .section-number {
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px 16px;
+    }
+
+    .field + .field {
+      margin-top: 20px;
+    }
+
+    .field-grid .field + .field {
+      margin-top: 0;
+    }
+
+    label,
+    .field-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .required {
+      padding: 3px 7px;
+      border-radius: 99px;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    textarea {
+      display: block;
+      width: 100%;
+      border: 1px solid #eee7d8;
+      border-radius: 24px;
+      outline: none;
+      color: var(--ink);
+      background: var(--field);
+      font: inherit;
+      font-size: 13px;
+      transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease;
+    }
+
+    input[type="text"] {
+      height: 50px;
+      padding: 0 18px;
+    }
+
+    textarea {
+      min-height: 112px;
+      padding: 16px 18px;
+      border-radius: 22px;
+      line-height: 1.7;
+      resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #9b927f;
+      opacity: 1;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: #e8d58f;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(255, 236, 185, 0.65);
+    }
+
+    .hint {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .info-card {
+      margin-bottom: 24px;
+      padding: 28px 30px;
+      border: 1px solid #eee5d2;
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 12px 36px rgba(68, 54, 31, 0.035);
+    }
+
+    .info-card h2 {
+      margin: 0 0 20px;
+      font-size: 19px;
+      letter-spacing: -0.04em;
+    }
+
+    .info-block + .info-block {
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .info-block h3 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .info-block p,
+    .info-block li {
+      color: #655b4c;
+      font-size: 13px;
+      line-height: 1.85;
+    }
+
+    .info-block p {
+      margin: 0;
+    }
+
+    .info-block p + p {
+      margin-top: 10px;
+    }
+
+    .info-block ul,
+    .info-block ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .process-flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .process-step {
+      position: relative;
+      min-height: 128px;
+      padding: 15px 13px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fffdf8;
+    }
+
+    .process-step:not(:last-child)::after {
+      position: absolute;
+      top: 50%;
+      right: -32px;
+      display: grid;
+      width: 24px;
+      height: 24px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      content: "→";
+      font-size: 16px;
+      font-weight: 700;
+      transform: translateY(-50%);
+    }
+
+    .step-number {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      margin-bottom: 12px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .process-step strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+
+    .process-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .refund-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .refund-step {
+      min-height: 105px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fffdf7;
+    }
+
+    .refund-step span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .refund-step strong {
+      display: block;
+      margin-top: 10px;
+      color: var(--accent-dark);
+      font-size: 18px;
+      letter-spacing: -0.04em;
+    }
+
+    .refund-note {
+      margin-top: 12px !important;
+      padding: 12px 14px;
+      border-radius: 12px;
+      color: #66552b !important;
+      background: var(--accent-soft);
+      font-weight: 600;
+    }
+
+    .agreement-note {
+      margin-top: 16px !important;
+      padding: 13px 15px;
+      border-radius: 14px;
+      color: #66552b !important;
+      background: var(--accent-soft);
+    }
+
+    .form-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .copy-button {
+      min-height: 48px;
+      padding: 0 24px;
+      border: 0;
+      border-radius: 999px;
+      color: #4f421f;
+      background: var(--accent);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 150ms ease, transform 150ms ease;
+    }
+
+    .copy-button:hover {
+      background: #f5dda0;
+      transform: translateY(-1px);
+    }
+
+    .copy-button:focus-visible {
+      outline: 3px solid rgba(255, 236, 185, 0.95);
+      outline-offset: 3px;
+    }
+
+    .form-status {
+      min-height: 1.5em;
+      margin: 0;
+      color: var(--accent-dark);
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 28px 14px 40px;
+      }
+
+      .page-header p,
+      .info-block p,
+      .info-block li {
+        font-size: 14px;
+      }
+
+      .hint,
+      .process-step p,
+      .refund-step span {
+        font-size: 12px;
+      }
+
+      .page-header {
+        margin-bottom: 30px;
+      }
+
+      .form-card {
+        padding: 24px 18px 20px;
+        border-radius: 22px;
+      }
+
+      .info-card {
+        padding: 24px 18px;
+        border-radius: 22px;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-flow {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .process-step:not(:last-child)::after {
+        top: auto;
+        right: auto;
+        bottom: -32px;
+        left: 50%;
+        content: "↓";
+        transform: translateX(-50%);
+      }
+
+      .refund-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .form-footer {
+        align-items: stretch;
+        flex-direction: column-reverse;
+      }
+
+      .copy-button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .refund-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-step {
+        min-height: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <h1>신청 안내 &amp; 문의 양식</h1>
+      <div class="title-mark" aria-hidden="true"></div>
+      <p>신청 전 안내 사항을 확인하신 뒤 양식을 작성해 주세요.</p>
+    </header>
+
+    <section class="info-card" aria-labelledby="notice-title">
+      <h2 id="notice-title">신청 전 필독 사항</h2>
+
+      <div class="info-block">
+        <h3>꼭 확인해 주세요</h3>
+        <p>작업 파일 전달 후 2주일 내로 컨펌 및 피드백이 없을 경우 작업 종료로 간주합니다. 이 경우 의뢰 금액 수령 후 작업 종료 처리합니다.</p>
+        <p>아트머그 위약금 규정에 따라 예약을 해지할 경우, 작가의 검토 시간 등을 고려하여 결제 대금의 10% 내에서 위약금을 받고 있습니다.</p>
+        <p class="agreement-note">의뢰를 신청하시면 위 안내 사항에 동의하신 것으로 간주합니다. 신청 전 내용을 꼼꼼히 확인해 주세요.</p>
+      </div>
+
+      <div class="info-block">
+        <h3>저작권 및 작업 기간</h3>
+        <p>모든 작업물의 저작권은 저(네쿠)에게 있으며, 작가의 SNS 등에 공개될 수 있습니다.</p>
+        <p>작업 기간은 보통 3주 내로 완성되나, 디자인의 복잡함과 컨펌 내용에 따라 시간이 더 소요될 수 있습니다.</p>
+      </div>
+
+      <div class="info-block">
+        <h3>작업 과정</h3>
+        <ol class="process-flow">
+          <li class="process-step">
+            <span class="step-number">01</span>
+            <strong>문의 접수</strong>
+            <p>신청 양식과 자료를 보내 주세요.</p>
+          </li>
+          <li class="process-step">
+            <span class="step-number">02</span>
+            <strong>입금 확인</strong>
+            <p>결제가 확인되면 작업을 시작합니다.</p>
+          </li>
+          <li class="process-step">
+            <span class="step-number">03</span>
+            <strong>러프 전달</strong>
+            <p>초안 시안을 확인하실 수 있어요.</p>
+          </li>
+          <li class="process-step">
+            <span class="step-number">04</span>
+            <strong>내용 확인</strong>
+            <p>수정할 점을 확인하고 컨펌합니다.</p>
+          </li>
+          <li class="process-step">
+            <span class="step-number">05</span>
+            <strong>완성·전달</strong>
+            <p>최종 작업물을 전달해 드립니다.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="info-block">
+        <h3>환불 안내</h3>
+        <ul class="refund-grid">
+          <li class="refund-step">
+            <span>러프 진행 전</span>
+            <strong>100% 환불</strong>
+          </li>
+          <li class="refund-step">
+            <span>러프 진행 후</span>
+            <strong>70% 환불</strong>
+          </li>
+          <li class="refund-step">
+            <span>선화 진행 후</span>
+            <strong>50% 환불</strong>
+          </li>
+          <li class="refund-step">
+            <span>완성 후</span>
+            <strong>환불 불가</strong>
+          </li>
+        </ul>
+        <p class="refund-note">예약금은 환불되지 않습니다. 환불을 신청하시기 전 단계별 기준을 확인해 주세요.</p>
+      </div>
+    </section>
+
+    <form class="form-card" id="inquiry-form">
+      <section class="section" aria-labelledby="section-application">
+        <h2 class="section-title" id="section-application">
+          <span class="section-number">01</span> 신청 양식
+        </h2>
+        <div class="field-grid">
+          <div class="field">
+            <label for="nickname">닉네임 <span class="required">필수</span></label>
+            <input id="nickname" name="닉네임" type="text" placeholder="신청하시는 닉네임을 적어 주세요." required>
+          </div>
+          <div class="field">
+            <label for="request-type">신청 타입 <span class="required">필수</span></label>
+            <input id="request-type" name="신청 타입" type="text" placeholder="원하시는 작업 타입을 적어 주세요." required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="character-info">관련 자료 및 요구사항 <span class="required">필수</span></label>
+          <textarea id="character-info" name="관련 자료 및 요구사항" placeholder="참고 자료와 작업에 필요한 요구사항을 적어 주세요." required></textarea>
+        </div>
+        <div class="field">
+          <label for="variation">바리에이션 신청 시 요구사항</label>
+          <textarea id="variation" name="바리에이션 신청 시 요구사항" placeholder="바리에이션 신청 시 원하는 구성이나 차이점을 적어 주세요. 해당하지 않으면 비워 두셔도 됩니다."></textarea>
+        </div>
+        <div class="field">
+          <label for="other">그 외 요구사항</label>
+          <textarea id="other" name="그 외 요구사항" placeholder="추가로 전달하실 내용을 적어 주세요."></textarea>
+        </div>
+      </section>
+
+      <div class="form-footer">
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        <button class="copy-button" type="submit">신청 내용 복사하기</button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    const form = document.querySelector("#inquiry-form");
+    const status = document.querySelector("#form-status");
+    function createInquiryText() {
+      const fields = [...form.querySelectorAll("input[type='text'], textarea")];
+      const lines = fields.map((field) => {
+        const value = field.value.trim() || "없음";
+        return `[${field.name}]\n${value}`;
+      });
+      return lines.join("\n\n");
+    }
+
+    async function copyInquiryText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      const temporaryInput = document.createElement("textarea");
+      temporaryInput.value = text;
+      temporaryInput.setAttribute("readonly", "");
+      temporaryInput.style.position = "fixed";
+      temporaryInput.style.opacity = "0";
+      document.body.append(temporaryInput);
+      temporaryInput.select();
+      const copied = document.execCommand("copy");
+      temporaryInput.remove();
+
+      if (!copied) {
+        throw new Error("클립보드에 복사하지 못했습니다.");
+      }
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      status.textContent = "";
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      try {
+        await copyInquiryText(createInquiryText());
+        status.textContent = "신청 내용이 복사되었습니다. 아트머그 문의창에 붙여 넣어 주세요.";
+      } catch (error) {
+        status.textContent = "복사에 실패했습니다. 브라우저 권한을 확인한 뒤 다시 시도해 주세요.";
+        console.error("문의 내용 복사 실패:", error);
+      }
+    });
+  </script>
+</body>
+</html>
